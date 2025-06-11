@@ -1,105 +1,345 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Exemplo de Site</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jornada dos Alimentos | Agrinho</title>
+    <style>
+        :root {
+            --verde-agrinho: #4CAF50;
+            --verde-escuro: #2E7D32;
+            --laranja: #FF9800;
+            --branco: #FFFFFF;
+            --cinza-claro: #F5F5F5;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--cinza-claro);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--verde-agrinho), var(--verde-escuro));
+            color: var(--branco);
+            text-align: center;
+            padding: 2rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 3rem auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--verde-agrinho);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 10px;
+        }
+        
+        .etapa {
+            padding: 1.5rem;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+            margin-bottom: 2rem;
+        }
+        
+        .etapa::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -12px;
+            background-color: var(--branco);
+            border: 4px solid var(--laranja);
+            top: 1.5rem;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .left {
+            left: 0;
+        }
+        
+        .right {
+            left: 50%;
+        }
+        
+        .left::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 1.5rem;
+            width: 0;
+            z-index: 1;
+            right: 30px;
+            border: medium solid var(--cinza-claro);
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent var(--cinza-claro);
+        }
+        
+        .right::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 1.5rem;
+            width: 0;
+            z-index: 1;
+            left: 30px;
+            border: medium solid var(--cinza-claro);
+            border-width: 10px 10px 10px 0;
+            border-color: transparent var(--cinza-claro) transparent transparent;
+        }
+        
+        .right::after {
+            left: -12px;
+        }
+        
+        .conteudo {
+            padding: 1.5rem;
+            background-color: var(--branco);
+            position: relative;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .conteudo:hover {
+            transform: translateY(-5px);
+        }
+        
+        .conteudo h2 {
+            color: var(--verde-escuro);
+            margin-top: 0;
+        }
+        
+        .conteudo img {
+            width: 100%;
+            border-radius: 8px;
+            margin: 1rem 0;
+            max-height: 200px;
+            object-fit: cover;
+        }
+        
+        .dica {
+            background-color: #E8F5E9;
+            padding: 1rem;
+            border-left: 4px solid var(--verde-agrinho);
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        footer {
+            background-color: var(--verde-escuro);
+            color: var(--branco);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .etapa {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .etapa::before {
+                left: 60px;
+                border: medium solid var(--cinza-claro);
+                border-width: 10px 10px 10px 0;
+                border-color: transparent var(--cinza-claro) transparent transparent;
+            }
+            
+            .left::after, .right::after {
+                left: 15px;
+            }
+            
+            .right {
+                left: 0%;
+            }
+        }
+        
+        .quiz {
+            background-color: var(--branco);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .quiz h2 {
+            color: var(--verde-escuro);
+            text-align: center;
+        }
+        
+        .pergunta {
+            margin-bottom: 1.5rem;
+        }
+        
+        button {
+            background-color: var(--verde-agrinho);
+            color: var(--branco);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: var(--verde-escuro);
+        }
+    </style>
 </head>
 <body>
-
-  <header>
-    <div class="logo-titulo">
-      <img src="img/logo.jpg" alt="Logo com uma escritra agrinho uma árvpre cemtralizada e uma escrita 2D abaixo" />
-      <h1> Projeto Agrinho 2025 </h1>
+    <header>
+        <div class="container">
+            <div class="logo">🌱 Agrinho</div>
+            <h1>Do Campo à Mesa: A Jornada dos Nossos Alimentos</h1>
+            <p>Descubra como os alimentos percorrem um longo caminho antes de chegar ao seu prato</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <section class="intro">
+            <p>Você já parou para pensar em quantas etapas os alimentos passam antes de chegar à sua casa? Neste site, vamos mostrar todo o processo, desde o plantio até o consumo, destacando a importância da agricultura e dos agricultores em nossas vidas.</p>
+        </section>
+        
+        <div class="timeline">
+            <div class="etapa left">
+                <div class="conteudo">
+                    <h2>1. Planejamento Agrícola</h2>
+                    <img src="https://images.unsplash.com/photo-1452723312111-3a7d0db0e024?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Planejamento agrícola">
+                    <p>Tudo começa com o planejamento: escolha da cultura, análise do solo, seleção de sementes e definição da época de plantio. O agricultor precisa considerar clima, mercado e recursos disponíveis.</p>
+                    <div class="dica">
+                        <strong>Sabia que?</strong> O Brasil é um dos maiores produtores de alimentos do mundo, destacando-se na produção de soja, café, açúcar e suco de laranja.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="etapa right">
+                <div class="conteudo">
+                    <h2>2. Preparação do Solo</h2>
+                    <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Preparação do solo">
+                    <p>O solo é preparado com aração, gradagem e correção de acidez. A adubação orgânica ou mineral é feita para fornecer nutrientes às plantas. Essa etapa é crucial para o bom desenvolvimento da lavoura.</p>
+                </div>
+            </div>
+            
+            <div class="etapa left">
+                <div class="conteudo">
+                    <h2>3. Plantio</h2>
+                    <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Plantio">
+                    <p>As sementes ou mudas são plantadas no solo preparado. O espaçamento e a profundidade variam conforme a cultura. Algumas plantações usam máquinas de plantio, enquanto outras ainda dependem do plantio manual.</p>
+                </div>
+            </div>
+            
+            <div class="etapa right">
+                <div class="conteudo">
+                    <h2>4. Cultivo e Manejo</h2>
+                    <img src="https://images.unsplash.com/photo-1586771107445-d3ca888129ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Cultivo">
+                    <p>Durante o crescimento, as plantas precisam de irrigação, controle de pragas e doenças, adubação complementar e outros cuidados. O manejo integrado ajuda a produzir alimentos com menos agrotóxicos.</p>
+                </div>
+            </div>
+            
+            <div class="etapa left">
+                <div class="conteudo">
+                    <h2>5. Colheita</h2>
+                    <img src="https://images.unsplash.com/photo-1504208434309-cb69f4fe52b0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Colheita">
+                    <p>Quando os alimentos estão no ponto certo, são colhidos. Algumas culturas são colhidas manualmente (como morango e café), enquanto outras usam colheitadeiras (como soja e trigo).</p>
+                    <div class="dica">
+                        <strong>Dica:</strong> Compre alimentos da época - eles são mais frescos, saborosos e geralmente mais baratos!
+                    </div>
+                </div>
+            </div>
+            
+            <div class="etapa right">
+                <div class="conteudo">
+                    <h2>6. Pós-colheita</h2>
+                    <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Processamento">
+                    <p>Os alimentos são limpos, selecionados, classificados e embalados. Alguns passam por processamento (como enlatamento ou congelamento) para aumentar sua durabilidade.</p>
+                </div>
+            </div>
+            
+            <div class="etapa left">
+                <div class="conteudo">
+                    <h2>7. Transporte e Distribuição</h2>
+                    <img src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Transporte">
+                    <p>Os alimentos são transportados para centros de distribuição e depois para mercados, feiras e outros pontos de venda. A logística é essencial para manter a qualidade dos produtos.</p>
+                </div>
+            </div>
+            
+            <div class="etapa right">
+                <div class="conteudo">
+                    <h2>8. Comercialização</h2>
+                    <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Comércio">
+                    <p>Nos supermercados, feiras e outros estabelecimentos, os consumidores podem escolher entre diversos alimentos. A agricultura familiar tem papel importante nessa etapa.</p>
+                </div>
+            </div>
+            
+            <div class="etapa left">
+                <div class="conteudo">
+                    <h2>9. Preparo e Consumo</h2>
+                    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Consumo">
+                    <p>Finalmente, os alimentos são preparados e consumidos, fornecendo os nutrientes necessários para nossa saúde. O aproveitamento integral dos alimentos reduz o desperdício.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="quiz">
+            <h2>Teste seus conhecimentos!</h2>
+            <div class="pergunta">
+                <p>1. Qual é a primeira etapa do processo de produção de alimentos?</p>
+                <input type="radio" name="q1" id="q1a"> <label for="q1a">Plantio</label><br>
+                <input type="radio" name="q1" id="q1b"> <label for="q1b">Preparação do solo</label><br>
+                <input type="radio" name="q1" id="q1c"> <label for="q1c">Planejamento agrícola</label>
+            </div>
+            
+            <div class="pergunta">
+                <p>2. Por que é importante comprar alimentos da época?</p>
+                <input type="radio" name="q2" id="q2a"> <label for="q2a">Porque são mais baratos</label><br>
+                <input type="radio" name="q2" id="q2b"> <label for="q2b">Porque são mais frescos e saborosos</label><br>
+                <input type="radio" name="q2" id="q2c"> <label for="q2c">Todas as alternativas anteriores</label>
+            </div>
+            
+            <button>Verificar respostas</button>
+        </div>
     </div>
-    <nav>
-      <ul class="menu">
-        <li><a href="#inicio">Início</a></li>
-        <li><a href="#sobre">Sobre</a></li>
-        <li><a href="#galeria">Galeria</a></li>
-        <li><a href="#contato">Contato</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <section class="titulo">
-    <h2>Bem-vindo ao nosso mundo!</h2>
-  </section>
-
-  <section class="banner-principal">
-    <img src="flor-esquerda.png" alt="Banner principal" />
-  </section>
-
-  <section class="conteudo invertido">
-    <div class="texto">
-      <h3>Seção 1</h3>
-      <p>Descrição da seção 1.</p>
-    </div>
-    <img src="https://via.placeholder.com/400x250" alt="Imagem seção 1" />
-  </section>
-
-  <section class="conteudo">
-    <img src="https://via.placeholder.com/400x250" alt="Imagem seção 2" />
-    <div class="texto">
-      <h3>Seção 2</h3>
-      <p>Descrição da seção 2.</p>
-    </div>
-  </section>
-
-  <section class="conteudo invertido">
-    <div class="texto">
-      <h3>Seção 3</h3>
-      <p>Descrição da seção 3.</p>
-    </div>
-    <img src="https://via.placeholder.com/400x250" alt="Imagem seção 3" />
-  </section>
-
-  <section class="galeria">
-    <h2>Galeria de Imagens</h2>
-    <div class="grid-galeria">
-      <img src="https://via.placeholder.com/200" alt="Imagem galeria 1" />
-      <img src="https://via.placeholder.com/200" alt="Imagem galeria 2" />
-      <img src="https://via.placeholder.com/200" alt="Imagem galeria 3" />
-      <img src="https://via.placeholder.com/200" alt="Imagem galeria 4" />
-      <img src="https://via.placeholder.com/200" alt="Imagem galeria 5" />
-      <img src="https://via.placeholder.com/200" alt="Imagem galeria 6" />
-    </div>
-  </section>
-
-  <section class="seis-imagens">
-    <h2>Destaques</h2>
-    <div class="grid-destaques">
-      <div class="item">
-        <img src="https://via.placeholder.com/150" alt="Destaque 1" />
-        <p>Título 1</p>
-      </div>
-      <div class="item">
-        <img src="https://via.placeholder.com/150" alt="Destaque 2" />
-        <p>Título 2</p>
-      </div>
-      <div class="item">
-        <img src="https://via.placeholder.com/150" alt="Destaque 3" />
-        <p>Título 3</p>
-      </div>
-      <div class="item">
-        <img src="https://via.placeholder.com/150" alt="Destaque 4" />
-        <p>Título 4</p>
-      </div>
-      <div class="item">
-        <img src="https://via.placeholder.com/150" alt="Destaque 5" />
-        <p>Título 5</p>
-      </div>
-      <div class="item">
-        <img src="https://via.placeholder.com/150" alt="Destaque 6" />
-        <p>Título 6</p>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 Meu Site. Todos os direitos reservados.</p>
-  </footer>
-
+    
+    <footer>
+        <div class="container">
+            <p>Projeto Agrinho - Do Campo à Mesa</p>
+            <p>Desenvolvido por [Seu Nome/Escola]</p>
+            <p>© 2023 - Todos os direitos reservados</p>
+        </div>
+    </footer>
 </body>
 </html>
